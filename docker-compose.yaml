@@ -1,0 +1,29 @@
+version: "3"
+services:
+  server:
+    restart: always
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    restart: always
+    build: ./sql
+    environment:
+      POSTGRES_PASSWORD: asapp
+      POSTGRES_USER: asapp
+      POSTGRES_DB: asapp_chat
+    ports:
+      - "2222:5432"
+
+  db_test:
+    restart: always
+    build: ./sql
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: asapp_chat_test
+    ports:
+      - "3345:5432"
